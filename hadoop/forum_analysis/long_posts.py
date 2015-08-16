@@ -23,19 +23,20 @@ def mapper():
         # YOUR CODE HERE
         post = line[4]
         if pq.qsize() < topsize:
-            pq.put(post)
+            pq.put((len(post), line))
         else:
             minpost = pq.get()
-            if len(minpost) >= len(post):
-                pq.put(minpost)
+            if minpost[0] >= post[0]:
+                pq.put((len(minpost), line))
             else:
-                pq.put(post)
+                pq.put((len(post), line))
     for i in range(topsize):
         result.append(pq.get())
         # writer.writerow(line)
-    result.sort(key=len)
+        result.sort(key=lambda x: x[0])
     for r in result:
-        print r
+        writer.writerow(r[1])
+        # print r[1]
 
 
 test_text = """\"\"\t\"\"\t\"\"\t\"\"\t\"333\"\t\"\"
