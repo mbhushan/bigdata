@@ -1,12 +1,14 @@
 import csv
+import re
 
 
 def csv_reader(num_lines):
 
+    patt = re.compile(r'\W+')
     with open("../data/forum_node.tsv", "rb") as f:
         reader = csv.reader(f, delimiter="\t")
         for row in reader:
-            print row[4]
+            print patt.split(row[4])
             num_lines -= 1
             if num_lines < 1:
                 break
