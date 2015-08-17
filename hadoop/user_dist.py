@@ -7,7 +7,7 @@ def gen_user_buckets():
     with open("email_ids.csv", "rb") as f:
         for line in f:
             st = line.split("@")[0]
-            st = line
+            # st = line
             m = hashlib.md5(st)
             md5 = m.hexdigest()
             res = md5[-6:]
