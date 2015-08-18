@@ -3,7 +3,6 @@ import re
 
 
 def csv_reader(num_lines):
-
     patt = re.compile(r'\W+')
     with open("../data/forum_node.tsv", "rb") as f:
         reader = csv.reader(f, delimiter="\t")
