@@ -3,6 +3,7 @@
 
 import sys
 import csv
+import re
 
 
 patt = re.compile(r'\W+')
@@ -10,14 +11,22 @@ reader = csv.reader(sys.stdin, delimiter="\t")
 firstrow = True
 key = "fantastic"
 
-for row in reader:
+for line in sys.stdin:
+    row = line.strip()
+    # row = re.findall(r"[\"](.*?)[\"]", row)
+    # print row
+    # print "TYPE: ", type(row)
     if firstrow:
         firstrow = False
         continue
-    words = patt.split(row[4])
+    # if len(row) < 5:
+    #    continue
+    words = patt.split(row)
+    # print "WORDS: ", words
     for w in words:
-        if w.lower() == key:
-            print w.lower()
+        cand = w.lower()
+        if cand == key:
+            print cand
 
 
 
