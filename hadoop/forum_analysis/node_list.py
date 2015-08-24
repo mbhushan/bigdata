@@ -14,6 +14,7 @@ count = 0
 limit = 10
 last = None
 curr = None
+user_dict = {}
 with open("forum_users.tsv", "rb") as f:
     print "inside with.."
     for line in f:
@@ -21,8 +22,9 @@ with open("forum_users.tsv", "rb") as f:
         keys = filter(None, keys)
         # print "Keys: ", keys
         if keys[0] and keys[0].isdigit():
-            print keys[0]
-exit()
+            # print keys[0]
+            user_dict[keys[0]] = True
+# exit()
 
 for line in sys.stdin:
     row = line.strip()
@@ -35,7 +37,10 @@ for line in sys.stdin:
     # if count == limit:
     #    break
     words = patt.split(row)
-    if words[0].isdigit():
+    words = filter(None, words)
+    if len(words) < 2:
+        continue
+    if words[0] and words[0].isdigit():
         curr = words[0]
 
     # print "WORDS: ", words
