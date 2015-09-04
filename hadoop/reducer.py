@@ -2,18 +2,20 @@
 
 import sys
 
+buff = None
 for line in sys.stdin:
     data = line.strip()
     values = data.split("\t")
-    # for i in range(2):
-    #    print "VAL: ", values[i]
-    if values[0].isalpha():
+    if not values[0].strip('"').isdigit():
         continue
-    marker = values[1]
-    buff = None
+    marker = values[1].strip('"')
+    # print "marker: ", marker
     if marker == "N":
         buff = values[2:]
+        # print "N_buff: ", buff
     elif marker == "U":
         buff.extend(values[2:])
-    else:
-        '\t'.join(buff)
+        # print "U_buff: ", buff
+        buff = '\t'.join(buff)
+        print buff
+        buff = None
